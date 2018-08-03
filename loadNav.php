@@ -10,9 +10,9 @@ $parentPagesResult = $mysqli->query($parentPageQuery);
 
 while($row = mysql_fetch_array($parentPagesResult))
 {
-    $currentRoot = new stdClass();
-    $currentRoot->children = array();
-    $currentRoot->title = $row['title'];
+    // $currentRoot = new stdClass();
+    // $currentRoot->children = array();
+    // $currentRoot->title = $row['title'];
     // $currentRootQuery = "select * from pages where parent_page_id = ".$row['id'];
     // $currentRootResult = $mysqli->query($currentRootQuery);
     // while($childRow = mysql_fetch_array($currentRootResult))
@@ -22,7 +22,6 @@ while($row = mysql_fetch_array($parentPagesResult))
     //     array_push($currentRoot->children, $currentRoot);
     // }
     // array_push($pages, $currentRoot);
-    echo $currentRoot->title;
 }
 
 // function addChildPages($result, $parentObject)
