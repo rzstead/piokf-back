@@ -21,7 +21,8 @@ while($row = mysql_fetch_array($parentPagesResult))
     //     $child->title = $childRow['title'];
     //     array_push($currentRoot->children, $currentRoot);
     // }
-    array_push($pages, $currentRoot);
+    // array_push($pages, $currentRoot);
+    echo $currentRoot->title;
 }
 
 // function addChildPages($result, $parentObject)
