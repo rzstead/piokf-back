@@ -1,14 +1,12 @@
 <?php
 
-throw new Exception("TEST");
+("Access-Control-Allow-Origin: *");
+include "dbconfig.php";
 
-// ("Access-Control-Allow-Origin: *");
-// include "dbconfig.php";
+$pages = array();
 
-// $pages = array();
-
-// $parentPageQuery = "select * from pages where parent_page_id is null";
-// $parentPagesResult = $mysqli->query($parentPageQuery);
+$parentPageQuery = "select * from pages where parent_page_id is null";
+$parentPagesResult = $mysqli->query($parentPageQuery);
 
 // while($row = mysql_fetch_array($parentPagesResult))
 // {
