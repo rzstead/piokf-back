@@ -1,6 +1,6 @@
 <?php
 
-echo $notReal;
+throw new Exception("TEST");
 
 // ("Access-Control-Allow-Origin: *");
 // include "dbconfig.php";
