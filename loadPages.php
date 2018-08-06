@@ -5,7 +5,7 @@ include "dbconfig.php";
 
 $pages = array();
 
-$parentPageQuery = "select * from PAGES where parent_page_id is null";
+$parentPageQuery = "select * from pages where parent_page_id is null";
 $parentPagesResult = $mysqli->query($parentPageQuery);
 
 while($row = mysqli_fetch_array($parentPagesResult))
@@ -14,7 +14,7 @@ while($row = mysqli_fetch_array($parentPagesResult))
     $currentRoot->id = $row['id'];
     $currentRoot->children = array();
     $currentRoot->title = $row['title'];
-    $currentRootQuery = "select * from PAGES where parent_page_id = ".$row['id'];
+    $currentRootQuery = "select * from pages where parent_page_id = ".$row['id'];
     $currentRootResult = $mysqli->query($currentRootQuery);
     while($childRow = mysqli_fetch_array($currentRootResult))
     {
