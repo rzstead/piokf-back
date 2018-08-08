@@ -8,17 +8,15 @@ session_start();
 if($_SESSION["isLoggedIn"]){
     $data = json_decode(file_get_contents('php://input'));
 
-    $addPageQuery = "insert into pages (title, parent_page_id) values ('"
-                        .$data->title."', '"
-                        .$data->parent_page_id."')";
+    $updateThemeQuery = "update config set current_theme = '"
+                        .$data->current_theme."' where 1 = 1'";
     
-    $pageAddResult = $mysqli->query($addPageQuery);
+    $themeUpdateResult = $mysqli->query($updateThemeQuery);
     
     /*
         EXAMPLE JSON EXPECTED:
         {
-            "title":"newPageTitle",
-            "parent_page_id":"3" //SET TO NULL IF PARENT
+            "current_theme":"dark.css"
         }
     */
 } else {

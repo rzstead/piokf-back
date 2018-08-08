@@ -3,26 +3,34 @@
 header("Access-Control-Allow-Origin: *");
 include "dbconfig.php";
 
-$data = json_decode(file_get_contents('php://input'));
+session_start();
 
-$addElementQuery = "update elements set type = '"
-                    .$data->type."', sequence = '"
-                    .$data->sequence."', inner_html = '"
-                    .$data->inner_html."', page_id = '"
-                    .$data->page_id."' where id = '"
-                    .$data->id."'";
+if($_SESSION["isLoggedIn"]){
+    $data = json_decode(file_get_contents('php://input'));
 
-$elementAddResult = $mysqli->query($addElementQuery);
-
-/*
-    EXAMPLE JSON EXPECTED:
-    {
-        "id":"5",
-        "type":"a",
-        "sequence":"3",
-        "inner_html":"Test Link",
-        "page_id":"4"
-    }
-*/
+    $addElementQuery = "update elements set type = '"
+                        .$data->type."', sequence = '"
+                        .$data->sequence."', inner_html = '"
+                        .$data->inner_html."', page_id = '"
+                        .$data->page_id."' where id = '"
+                        .$data->id."'";
+    
+    $elementAddResult = $mysqli->query($addElementQuery);
+    
+    /*
+        EXAMPLE JSON EXPECTED:
+        {
+            "id":"5",
+            "type":"a",
+            "sequence":"3",
+            "inner_html":"Test Link",
+            "page_id":"4"
+        }
+    */
+} else {
+    echo "invalid login credentials";
+    header("HTTP/1.1 401 Unauthorized");
+    exit;
+}
 
 ?>
