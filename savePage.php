@@ -28,7 +28,7 @@ if($_SESSION["isLoggedIn"]){
         $newPageData->title = $row['title'];
 
         //Load in all elements
-        for($x = 0; $x < count($data); $x++){
+        for($x = 0; $x < count($data->elements); $x++){
             //START ADD ELEMENT
             $addElementQuery = "insert into elements (type, sequence, inner_html, page_id) values ('"
                                 .$data->elements[$x]->type."', '"
