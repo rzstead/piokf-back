@@ -19,6 +19,7 @@ $_SESSION["isLoggedIn"] = $row['password'] == $password;
 if($_SESSION["isLoggedIn"]){
     $messageData = new stdClass();
     $messageData->message = "login successful";
+    $messageData->sessionId = session_id();
     echo json_encode($messageData);
 } else {
     $errorData = new stdClass();
