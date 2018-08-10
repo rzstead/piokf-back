@@ -87,8 +87,9 @@ if($_SESSION["isLoggedIn"] || true){
                 deletePage($page_id);
             } else {
                 $errorData = new stdClass();
-                $errorData->message = "Error adding element";
+                $errorData->message = "Error adding element: element id = ".$data->elements[$x]->id;
                 echo json_encode($errorData);
+                exit;
             }
             //END ADD ELEMENT
         }
