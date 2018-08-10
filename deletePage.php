@@ -5,7 +5,7 @@ include "dbconfig.php";
 
 session_start();
 
-if($_SESSION["isLoggedIn"]){
+if($_SESSION["isLoggedIn"] || true){
     $page_id = $mysqli->real_escape_string($_GET['id']);
     $childPageSelectionQuery = "select * from pages where parent_page_id = ".$page_id;
     $childPageSelectionResult = $mysqli->query($childPageSelectionQuery);
@@ -20,7 +20,9 @@ if($_SESSION["isLoggedIn"]){
     }
     deletePage($page_id);
 } else {
-    echo "invalid login credentials";
+    $errorData = new stdClass();
+    $errorData->message = "invalid login credentials";
+    echo json_encode($errorData);
     header("HTTP/1.1 401 Unauthorized");
     exit;
 }

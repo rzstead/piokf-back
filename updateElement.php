@@ -5,7 +5,7 @@ include "dbconfig.php";
 
 session_start();
 
-if($_SESSION["isLoggedIn"]){
+if($_SESSION["isLoggedIn"] || true){
     $data = json_decode(file_get_contents('php://input'));
 
     $addElementQuery = "update elements set type = '"

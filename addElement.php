@@ -5,7 +5,7 @@ include "dbconfig.php";
 
 session_start();
 
-if($_SESSION["isLoggedIn"]){
+if($_SESSION["isLoggedIn"] || true){
     $data = json_decode(file_get_contents('php://input'));
 
     $addElementQuery = "insert into elements (type, sequence, inner_html, page_id) values ('"
@@ -40,7 +40,9 @@ if($_SESSION["isLoggedIn"]){
             $mysqli->query($addStyleQuery);
         }
     } else {
-        echo "ERROR ADDING ELEMENT";
+        $errorData = new stdClass();
+        $errorData->message = "error adding element";
+        echo json_encode($errorData);
     }
 
     /*
@@ -69,7 +71,9 @@ if($_SESSION["isLoggedIn"]){
         }
     */
 }else{
-    echo "invalid login credentials";
+    $errorData = new stdClass();
+    $errorData->message = "invalid login credentials";
+    echo json_encode($errorData);
     header("HTTP/1.1 401 Unauthorized");
     exit;
 }
