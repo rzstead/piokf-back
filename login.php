@@ -1,7 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: 69.27.21.152");
-header("Access-Control-Allow-Credentials: true")
+header("Access-Control-Allow-Origin: *");
 include "dbconfig.php";
 
 session_start();
