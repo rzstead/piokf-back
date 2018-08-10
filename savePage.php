@@ -33,7 +33,7 @@ if($_SESSION["isLoggedIn"] || true){
             $addElementQuery = "insert into elements (type, sequence, inner_html, page_id) values ('"
                                 .$data->elements[$x]->type."', '"
                                 .$data->elements[$x]->sequence."', '"
-                                .$data->elements[$x]->inner_html."', '"
+                                .$data->elements[$x]->innerHtml."', '"
                                 .$newPageData->id"')";
 
             $elementAddResult = $mysqli->query($addElementQuery);
