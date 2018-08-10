@@ -16,7 +16,7 @@ while($row = mysqli_fetch_array($elementsResult))
     $element->id = $row['id'];
     $element->type = $row['type'];
     $element->sequence = $row['sequence'];
-    $element->innerHtml = $row['inner_html'];
+    $element->innerHTML = $row['inner_html'];
     $element->pageId = $row['page_id'];
     $element->attributes = array();
     $element->styles = array();
@@ -41,6 +41,11 @@ while($row = mysqli_fetch_array($elementsResult))
     array_push($elements, $element);
 }
 
-echo json_encode($elements);
+$page = new stdClass();
+$page->id = $page_id;
+//$page->title = 'I am hardcoded... Please fix me in the future';
+$page->elements = $elements;
+
+echo json_encode($page);
 
 ?>
