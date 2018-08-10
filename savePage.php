@@ -34,7 +34,7 @@ if($_SESSION["isLoggedIn"] || true){
                                 .$data->elements[$x]->type."', '"
                                 .$data->elements[$x]->sequence."', '"
                                 .$data->elements[$x]->innerHTML."', '"
-                                .$newPageData->id"')";
+                                .$newPageData->id."')";
 
             $elementAddResult = $mysqli->query($addElementQuery);
 
