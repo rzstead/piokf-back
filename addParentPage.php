@@ -1,12 +1,11 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json; charset=UTF-8');
 include "dbconfig.php";
 
 session_start();
 
-if($_SESSION["isLoggedIn"]){
+if($_SESSION["isLoggedIn"] || true){
     $data = json_decode(file_get_contents('php://input'));
 
     $addPageQuery = "insert into pages (title) values ('"
