@@ -34,7 +34,7 @@ if($_SESSION["isLoggedIn"] || true){
                                 .$data->elements[$x]->type."', '"
                                 .$data->elements[$x]->sequence."', '"
                                 .$data->elements[$x]->inner_html."', '"
-                                .$data->elements[$x]->page_id."')";
+                                .$newPageData->id"')";
 
             $elementAddResult = $mysqli->query($addElementQuery);
 
@@ -59,31 +59,35 @@ if($_SESSION["isLoggedIn"] || true){
                                         .$data->elements[$x]->styles[$i]->value."')";
                     $mysqli->query($addStyleQuery);
                 }
+
+                //DELETE OLD PAGE
+                $page_id = $data->id;
+                $childPageSelectionQuery = "select * from pages where parent_page_id = ".$page_id;
+                $childPageSelectionResult = $mysqli->query($childPageSelectionQuery);
+                $childPageIds = array();
+
+                while($row = mysqli_fetch_array($childPageSelectionResult)){
+                    array_push($childPageIds, $row['id']);
+                }
+
+                for($i = 0; $i < count($childPageIds); $i++){
+                    deletePage($childPageIds[$i]);
+                }
+                deletePage($page_id);
             } else {
-                echo "ERROR ADDING ELEMENT";
+                $errorData = new stdClass();
+                $errorData->message = "Error adding element";
+                echo json_encode($errorData);
             }
             //END ADD ELEMENT
         }
 
-        //DELETE OLD PAGE
-        $page_id = $data->id;
-        $childPageSelectionQuery = "select * from pages where parent_page_id = ".$page_id;
-        $childPageSelectionResult = $mysqli->query($childPageSelectionQuery);
-        $childPageIds = array();
-
-        while($row = mysqli_fetch_array($childPageSelectionResult)){
-            array_push($childPageIds, $row['id']);
-        }
-
-        for($i = 0; $i < count($childPageIds); $i++){
-            deletePage($childPageIds[$i]);
-        }
-        deletePage($page_id);
-
         echo json_encode($newPageData);
     }
 } else {
-    echo "invalid login credentials";
+    $errorData = new stdClass();
+                $errorData->message = "Invalid credentials.";
+                echo json_encode($errorData);
     header("HTTP/1.1 401 Unauthorized");
     exit;
 }
