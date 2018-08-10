@@ -30,6 +30,7 @@ if($_SESSION["isLoggedIn"] || true){
         //Load in all elements
         for($x = 0; $x < count($data->elements); $x++){
             //START ADD ELEMENT
+            $data->elements[$x]->sequence = 0;
             $addElementQuery = "insert into elements (type, sequence, inner_html, page_id) values ('"
                                 .$data->elements[$x]->type."', '"
                                 .$data->elements[$x]->sequence."', '"
