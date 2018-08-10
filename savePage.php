@@ -44,21 +44,25 @@ if($_SESSION["isLoggedIn"] || true){
                 $elementId = mysqli_fetch_array($mysqli->query($elementIdQuery))['id'];
 
                 // add all attributes
-                for($i = 0; $i < count($data->elements[$x]->attributes); $i++){
-                    $addAttributeQuery = "insert into element_attributes (element_id, attribute_name, attribute_value) values ('"
-                                        .$elementId."', '"
-                                        .$data->elements[$x]->attributes[$i]->name."', '"
-                                        .$data->elements[$x]->attributes[$i]->value."')";
-                    $mysqli->query($addAttributeQuery);
+                if(is_array($data->elements[$x]->attributes)){
+                    for($i = 0; $i < count($data->elements[$x]->attributes); $i++){
+                        $addAttributeQuery = "insert into element_attributes (element_id, attribute_name, attribute_value) values ('"
+                                            .$elementId."', '"
+                                            .$data->elements[$x]->attributes[$i]->name."', '"
+                                            .$data->elements[$x]->attributes[$i]->value."')";
+                        $mysqli->query($addAttributeQuery);
+                    }
                 }
 
                 // add all styles
-                for($i = 0; $i < count($data->elements[$x]->styles); $i++){
-                    $addStyleQuery = "insert into element_styles (element_id, style_attribute, style_value) values ('"
-                                        .$elementId."', '"
-                                        .$data->elements[$x]->styles[$i]->attribute."', '"
-                                        .$data->elements[$x]->styles[$i]->value."')";
-                    $mysqli->query($addStyleQuery);
+                if(is_array($data->elements[$x]->styles)){
+                    for($i = 0; $i < count($data->elements[$x]->styles); $i++){
+                        $addStyleQuery = "insert into element_styles (element_id, style_attribute, style_value) values ('"
+                                            .$elementId."', '"
+                                            .$data->elements[$x]->styles[$i]->attribute."', '"
+                                            .$data->elements[$x]->styles[$i]->value."')";
+                        $mysqli->query($addStyleQuery);
+                    }
                 }
 
                 //UPDATE CHILDREN
