@@ -5,7 +5,7 @@ include "dbconfig.php";
 
 session_start();
 
-if($_SESSION["isLoggedIn"] || true){
+if($_SESSION["isLoggedIn"]){
     $data = json_decode(file_get_contents('php://input'));
 
     $addPageQuery = "insert into pages (title) values ('"
