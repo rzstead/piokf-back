@@ -14,7 +14,16 @@ if($_SESSION["isLoggedIn"] || true){
                         .$data->parent_page_id."')";
 
     $pageAddResult = $mysqli->query($addPageQuery);
+    if($pageAddResult){
+        $newPageData = new stdClass();
 
+        $pageQuery = "select * from pages order by id desc limit 1";
+        $pageResult = $mysqli->query($pageQuery);
+        $row = mysqli_fetch_array($pageResult);
+        $newPageData->id = $row['id'];
+
+        echo json_encode($newPageData);
+    }
     
     /*
         EXAMPLE JSON EXPECTED:
