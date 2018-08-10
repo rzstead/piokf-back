@@ -5,14 +5,16 @@ include "dbconfig.php";
 
 session_start();
 
-if($_SESSION["isLoggedIn"]){
+// TODO remove 'true'... used to bypass auth for testing
+if($_SESSION["isLoggedIn"] || true){
     $data = json_decode(file_get_contents('php://input'));
 
     $addPageQuery = "insert into pages (title, parent_page_id) values ('"
                         .$data->title."', '"
                         .$data->parent_page_id."')";
-    
+
     $pageAddResult = $mysqli->query($addPageQuery);
+
     
     /*
         EXAMPLE JSON EXPECTED:
