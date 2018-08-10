@@ -1,13 +1,13 @@
 <?php
 
-header("Access-Control-Allow-Origin: localhost:3000");
-header("Access-Control-Allow-Headers: true");
+header("Access-Control-Allow-Origin: *");
 include "dbconfig.php";
 
 session_start();
 
-$username = $_SERVER['PHP_AUTH_USER'];
-$password = $_SERVER['PHP_AUTH_PW'];
+$data = json_decode(file_get_contents('php://input'));
+$username = $data->username;
+$password = $data->password;
 
 $loginQuery = "select * from users where username = '".$username."'";
 

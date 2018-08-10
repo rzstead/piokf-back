@@ -24,7 +24,9 @@ if($_SESSION["isLoggedIn"] || true){
     
     */
 } else {
-    echo "invalid login credentials";
+    $errorData = new stdClass();
+    $errorData->message = "invalid login credentials";
+    echo json_encode($errorData);
     header("HTTP/1.1 401 Unauthorized");
     exit;
 }
