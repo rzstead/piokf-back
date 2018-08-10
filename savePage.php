@@ -60,6 +60,12 @@ if($_SESSION["isLoggedIn"] || true){
                     $mysqli->query($addStyleQuery);
                 }
 
+                //UPDATE CHILDREN
+                $updatePageQuery = "update pages set parent_page_id = '"
+                        .$newPageData->id."' where parent_page_id = '".$data->id."'";
+    
+                $pageUpdateResult = $mysqli->query($updatePageQuery);
+
                 //DELETE OLD PAGE
                 $page_id = $data->id;
                 $childPageSelectionQuery = "select * from pages where parent_page_id = ".$page_id;
