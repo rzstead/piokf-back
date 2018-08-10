@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: localhost");
+header("Access-Control-Allow-Origin: localhost:3000");
 header("Access-Control-Allow-Headers: true");
 include "dbconfig.php";
 
