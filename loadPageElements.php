@@ -43,7 +43,13 @@ while($row = mysqli_fetch_array($elementsResult))
 
 $page = new stdClass();
 $page->id = $page_id;
-//$page->title = 'I am hardcoded... Please fix me in the future';
+
+$parentPageQuery = "select * from pages where parent_page_id = ".$page->id;
+$parentPagesResult = $mysqli->query($parentPageQuery);
+
+$row = mysqli_fetch_array($parentPagesResult);
+
+$page->title = $row['title'];
 $page->elements = $elements;
 
 echo json_encode($page);
