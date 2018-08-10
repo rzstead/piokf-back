@@ -32,9 +32,9 @@ if($_SESSION["isLoggedIn"] || true){
             //START ADD ELEMENT
             $data->elements[$x]->sequence = 0;
             $addElementQuery = "insert into elements (type, sequence, inner_html, page_id) values ('"
-                                .$data->elements[$x]->type."', '"
-                                .$data->elements[$x]->sequence."', '"
-                                .$data->elements[$x]->innerHTML."', '"
+                                .htmlspecialchars($data->elements[$x]->type, ENT_QUOTES)."', '"
+                                .htmlspecialchars($data->elements[$x]->sequence, ENT_QUOTES)."', '"
+                                .htmlspecialchars($data->elements[$x]->innerHTML, ENT_QUOTES)."', '"
                                 .$newPageData->id."')";
 
             $elementAddResult = $mysqli->query($addElementQuery);
