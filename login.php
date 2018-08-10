@@ -18,7 +18,7 @@ $_SESSION["isLoggedIn"] = $row['password'] == $password;
 if($_SESSION["isLoggedIn"]){
     $messageData = new stdClass();
     $messageData->message = "login successful";
-    echo json_encode($errorData);
+    echo json_encode($messageData);
 } else {
     $errorData = new stdClass();
     $errorData->message = "invalid login credentials";
