@@ -21,6 +21,7 @@ if($_SESSION["isLoggedIn"] || true){
         $pageResult = $mysqli->query($pageQuery);
         $row = mysqli_fetch_array($pageResult);
         $newPageData->id = $row['id'];
+        $newPageData->title = $row['title'];
 
         echo json_encode($newPageData);
     }
