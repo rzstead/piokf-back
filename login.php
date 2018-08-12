@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: http://neumontcsc270.dynu.net:3000");
 header("Access-Control-Allow-Headers: Authorization, X-Requested-With");
 include "dbconfig.php";
 
