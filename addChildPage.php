@@ -3,10 +3,17 @@
 header("Access-Control-Allow-Origin: *");
 include "dbconfig.php";
 
-session_start();
+// session_start();
 
-// TODO remove 'true'... used to bypass auth for testing
-if($_SESSION["isLoggedIn"] || true){
+$username = $_SERVER['PHP_AUTH_USER'];
+$password = $_SERVER['PHP_AUTH_PW'];
+$loginQuery = "select * from users where username = '".$username."'";
+$loginResult = $mysqli->query($loginQuery);
+
+$row = mysqli_fetch_array($loginResult);
+$isLoggedIn = $row['password'] == $password;
+
+if($isLoggedIn){
     $data = json_decode(file_get_contents('php://input'));
 
     $addPageQuery = "insert into pages (title, parent_page_id) values ('"

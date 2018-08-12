@@ -3,23 +3,27 @@
 header("Access-Control-Allow-Origin: *");
 include "dbconfig.php";
 
-session_start();
+//session_start();
 
-$data = json_decode(file_get_contents('php://input'));
-$username = $data->username;
-$password = $data->password;
-
+// $data = json_decode(file_get_contents('php://input'));
+// $username = $data->username;
+// $password = $data->password;
+$username = $_SERVER['PHP_AUTH_USER'];
+$password = $_SERVER['PHP_AUTH_PW'];
 $loginQuery = "select * from users where username = '".$username."'";
-
 $loginResult = $mysqli->query($loginQuery);
 
 $row = mysqli_fetch_array($loginResult);
-$_SESSION["isLoggedIn"] = $row['password'] == $password;
+$isLoggedIn = $row['password'] == $password;
 
-if($_SESSION["isLoggedIn"]){
+//$_SESSION["isLoggedIn"] = $row['password'] == $password;
+
+if($isLoggedIn){
+    $authInfo = "Basic ".base64_encode($username.":".$password);
+
     $messageData = new stdClass();
     $messageData->message = "login successful";
-    $messageData->sessionId = session_id();
+    $messageData->token = $authInfo;
     echo json_encode($messageData);
 } else {
     $errorData = new stdClass();

@@ -3,9 +3,17 @@
 header("Access-Control-Allow-Origin: *");
 include "dbconfig.php";
 
-session_start();
+// session_start();
 
-if($_SESSION["isLoggedIn"] || true){
+$username = $_SERVER['PHP_AUTH_USER'];
+$password = $_SERVER['PHP_AUTH_PW'];
+$loginQuery = "select * from users where username = '".$username."'";
+$loginResult = $mysqli->query($loginQuery);
+
+$row = mysqli_fetch_array($loginResult);
+$isLoggedIn = $row['password'] == $password;
+
+if($isLoggedIn){
     $page_id = $mysqli->real_escape_string($_GET['id']);
     $childPageSelectionQuery = "select * from pages where parent_page_id = ".$page_id;
     $childPageSelectionResult = $mysqli->query($childPageSelectionQuery);

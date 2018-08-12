@@ -3,9 +3,17 @@
 header("Access-Control-Allow-Origin: *");
 include "dbconfig.php";
 
-session_start();
+// session_start();
 
-if($_SESSION["isLoggedIn"] || true){
+$username = $_SERVER['PHP_AUTH_USER'];
+$password = $_SERVER['PHP_AUTH_PW'];
+$loginQuery = "select * from users where username = '".$username."'";
+$loginResult = $mysqli->query($loginQuery);
+
+$row = mysqli_fetch_array($loginResult);
+$isLoggedIn = $row['password'] == $password;
+
+if($isLoggedIn){
     $data = json_decode(file_get_contents('php://input'));
 
     $updateStyleQuery = "update element_styles set value = '"
