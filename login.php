@@ -1,7 +1,7 @@
 <?php
 
 header("Access-Control-Allow-Origin: http://localhost:3000");
-header("Access-Control-Allow-Headers: Authorization");
+header("Access-Control-Allow-Headers: Authorization, X-Requested-With");
 include "dbconfig.php";
 
 //session_start();
